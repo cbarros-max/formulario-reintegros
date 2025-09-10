@@ -54,14 +54,17 @@ export default function Form() {
         canal: "react-public-form",
       };
 
-      const res = await fetch(import.meta.env.VITE_FLOW_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": import.meta.env.VITE_API_KEY || "",
-        },
-        body: JSON.stringify(payload),
-      });
+     // ---- nueva forma: API key por query param, sin header custom ----
+const flowUrl = import.meta.env.VITE_FLOW_URL?.trim();
+const apiKey  = import.meta.env.VITE_API_KEY?.trim() || "";
+const urlWithKey = `${flowUrl}${flowUrl.includes("?") ? "&" : "?"}k=${encodeURIComponent(apiKey)}`;
+
+const res = await fetch(urlWithKey, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" }, // sin x-api-key => no hay preflight
+  body: JSON.stringify(payload),
+});
+
 
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       setStatus({ ok:true, msg:"¡Enviado con éxito!" });
