@@ -66,3 +66,79 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+:root{
+  --bg:#0b1220;          /* fondo de la página */
+  --card:#111827;        /* tarjeta */
+  --muted:#9ca3af;
+  --text:#f3f4f6;
+  --accent:#2563eb;
+  --accent-2:#1d4ed8;
+  --ok:#10b981;
+  --err:#ef4444;
+}
+
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0; background:linear-gradient(180deg,#0b1220 0%,#0f172a 100%);
+  color:var(--text); font-family: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto;
+}
+
+.wrap{max-width:980px; margin:48px auto; padding:0 20px}
+.hero{margin-bottom:18px}
+.hero h1{font-size:44px; margin:0 0 8px}
+.hero p{color:var(--muted); margin:0}
+
+.card{
+  background:var(--card);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:16px;
+  padding:24px;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+.grid{
+  display:grid; gap:16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (max-width: 720px){
+  .grid{ grid-template-columns: 1fr; }
+  .span-2{ grid-column: span 1; }
+}
+.span-2{ grid-column: span 2; }
+
+.field label{
+  display:block; margin-bottom:6px; font-weight:600;
+}
+.field input[type="text"],
+.field input:not([type="file"]),
+.field select,
+.field textarea{
+  width:100%; padding:10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,.12);
+  background:#0b1020; color:var(--text); outline:none;
+}
+.field input[type="file"]{ color:var(--muted) }
+.field input:focus,
+.field select:focus,
+.field textarea:focus{ border-color:var(--accent) }
+
+.hint{ color:var(--muted) }
+
+.actions{ margin-top:8px; display:flex; justify-content:flex-end }
+.btn{
+  background:var(--accent); border:none; color:white; padding:10px 18px;
+  border-radius:12px; font-weight:600; cursor:pointer;
+  box-shadow:0 8px 20px rgba(37,99,235,.35); transition:transform .06s ease, background .2s ease;
+}
+.btn:disabled{ opacity:.7; cursor:not-allowed; box-shadow:none }
+.btn:not(:disabled):hover{ background:var(--accent-2) }
+.btn:not(:disabled):active{ transform: translateY(1px) }
+
+.alert{
+  margin-top:16px; padding:10px 14px; border-radius:10px; font-weight:600;
+  background:rgba(255,255,255,.06);
+}
+.alert.ok{ border:1px solid rgba(16,185,129,.6); color:#d1fae5 }
+.alert.err{ border:1px solid rgba(239,68,68,.6); color:#fee2e2 }
+
+.foot{ text-align:center; color:var(--muted); margin-top:18px }
